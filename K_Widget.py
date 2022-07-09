@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+#! -*- coding: utf-8 -*-
 """
 　  my uniqe cv2 gui classes
     rootclass : object
-    rectangle : rectangle_object 
+    rectangle : rectangle_object
         place rectangle
     text : text_object
         place text
@@ -92,11 +92,10 @@ class Text(object):
                     lineType=self.lineType)
         
 class Button(Text):
-    def __init__(self,img,text,textcolor = (0,0,0),bg = (255,255,255),fill = True,fontnum = 5,fontscale = 1.0,thickness=3,lineType=cv2.LINE_4):
+    def __init__(self,img,text,textcolor = (0,0,0),bg = (255,255,255),fontnum = 5,fontscale = 1.0,thickness=3,lineType=cv2.LINE_4):
         super().__init__(img,text,color=textcolor,fontnum = fontnum,fontscale = fontscale,thickness=thickness,lineType=lineType)
         if textcolor == (0,0,0):
             bg = textcolor
-        self.fill = fill
         self.buttoncolor = bg
         self.locate = [0,0,0,0]#top,left,bottom,left
         
@@ -108,7 +107,7 @@ class Button(Text):
         p1 = (x-padding,y)
         p2 = (x + w+padding,y + h+padding)
         self.locate = [y,x-padding,y + h+padding,x + w+padding]
-        RoundedRectangle(self.parentimg,p1,p2,5,self.buttoncolor,self.thickness,self.lineType,fill = self.fill)
+        RoundedRectangle(self.parentimg,p1,p2,5,self.buttoncolor,self.thickness,self.lineType)
         super().place(x,y)
     def active(self,framename,*command,**keys):
         self.act = True
@@ -144,7 +143,7 @@ class Button(Text):
         
         
         
-def RoundedRectangle(img,p1,p2,r,color,thickness,lineType,fill = False):
+def RoundedRectangle(img,p1,p2,r,color,thickness,lineType):
     #cv2.ellipse(img, center, axes, angle, startAngle, endAngle, color, thickness=1, lineType=cv2.LINE_8, shift=0)
     if p1[0] >=p2[0]:
         right = p2[0]
@@ -159,19 +158,11 @@ def RoundedRectangle(img,p1,p2,r,color,thickness,lineType,fill = False):
         top = p1[1]
         bottom = p2[1]
     
-    if fill:
-        cv2.rectangle(img,pt1=(left,top+r),pt2=(right,bottom-r),color = color,thickness=-1,lineType=cv2.LINE_4,shift=0)
-        cv2.rectangle(img,pt1=(left+r,top),pt2=(right-r,bottom),color = color,thickness=-1,lineType=cv2.LINE_4,shift=0)
-        
-        cv2.ellipse(img, (right-r, bottom-r), (r,r), 0, 0, 90, color, thickness=-1)
-        cv2.ellipse(img, (left+r, bottom-r), (r,r), 90, 0, 90, color, thickness=-1)
-        cv2.ellipse(img, (left+r, top+r), (r,r), 180, 0, 90, color, thickness=-1)
-        cv2.ellipse(img, (right-r, top+r), (r,r), 270, 0, 90, color, thickness=-1)
-    else:
-        cv2.rectangle(img,pt1=(left,top+r),pt2=(right,bottom-r),color = color,thickness=thickness,lineType=lineType,shift=0)
-        cv2.rectangle(img,pt1=(left+r,top),pt2=(right-r,bottom),color = color,thickness=thickness,lineType=lineType,shift=0)
-        
-        cv2.ellipse(img, (right-r, bottom-r), (r,r), 0, 0, 90, color, thickness=thickness)
-        cv2.ellipse(img, (left+r, bottom-r), (r,r), 90, 0, 90, color, thickness=thickness)
-        cv2.ellipse(img, (left+r, top+r), (r,r), 180, 0, 90, color, thickness=thickness)
-        cv2.ellipse(img, (right-r, top+r), (r,r), 270, 0, 90, color, thickness=thickness)
+
+    cv2.rectangle(img,pt1=(left,top+r),pt2=(right,bottom-r),color = color,thickness=-1,lineType=cv2.LINE_4,shift=0)
+    cv2.rectangle(img,pt1=(left+r,top),pt2=(right-r,bottom),color = color,thickness=-1,lineType=cv2.LINE_4,shift=0)
+
+    cv2.ellipse(img, (right-r, bottom-r), (r,r), 0, 0, 90, color, thickness=-1)
+    cv2.ellipse(img, (left+r, bottom-r), (r,r), 90, 0, 90, color, thickness=-1)
+    cv2.ellipse(img, (left+r, top+r), (r,r), 180, 0, 90, color, thickness=-1)
+    cv2.ellipse(img, (right-r, top+r), (r,r), 270, 0, 90, color, thickness=-1)
