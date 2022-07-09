@@ -11,5 +11,10 @@
 ### K_Widget_sample
 
 <ol>
-  <li>git　clone でK_Widget_sample.py、および、K_Widget.py を入手</li>
+  <li>cv2　および　numpyのインストールされた環境を用意</li>
+  <li>zipでダウンロード、または、git　clone で(K_Widget_sample.py,K_Widget.py)を入手</li>
+  <li>python でK_Widget_sample.pyを実行</li>
 </ol>
+
+実行できれば、以下の画像のようなフレームが表示される。
+ボタン上で左クリックすれば、そのボタンに紐づけられた関数が実行される。
