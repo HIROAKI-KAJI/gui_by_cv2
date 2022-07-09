@@ -5,4 +5,9 @@
 　cv2のGUIツール
 
 ## 使い方
+### 必要なmodule
+<il>cv2</li>
+  
+### K_Widget_sample
 
+zipでダウンロードするなどして
