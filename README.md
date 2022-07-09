@@ -2,7 +2,7 @@
 
 :unique gui widgets write by cv2
 
-##how to use?
+## how to use?
 
 sample:
 folder -- 
