@@ -10,4 +10,6 @@
   
 ### K_Widget_sample
 
-zipでダウンロードするなどして
+<ol>
+  <li>git　clone でK_Widget_sample.py、および、K_Widget.py を入手</li>
+</ol>
