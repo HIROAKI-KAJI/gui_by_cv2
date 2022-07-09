@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-”””
+"""
 　  my uniqe cv2 gui classes
     rootclass : object
     rectangle : rectangle_object 
@@ -9,7 +9,7 @@
     button : button_object
         place button
         active bind function
-”””
+"""
 import cv2
 
 fontlis =  [cv2.FONT_HERSHEY_SIMPLEX,
