@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ”””
 　  my uniqe cv2 gui classes
     rootclass : object
