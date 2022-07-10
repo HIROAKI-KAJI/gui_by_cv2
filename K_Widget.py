@@ -33,6 +33,7 @@ class object:
         self.thickness =1
         self.lineType = cv2.LINE_4
         self.shift = 0
+        self.masterframe = ""
         
     def setting(self,constructsdic):
         for key in constructsdic:
@@ -111,11 +112,10 @@ class Button(Text):
         super().place(x,y)
     def active(self,framename,*command,**keys):
         self.act = True
-        cv2.setMouseCallback(framename, self.uerinterrupt)
-
+        #cv2.setMouseCallback(framename, self.uerinterrupt)
+        self.masterframe = framename
         self.command = command
         self.keys = keys
-        
         
         for key in self.keys:
             if type(self.keys[key]) != type(tuple()):
@@ -123,8 +123,10 @@ class Button(Text):
         
     def deactive(self):
         self.act = False
-    def uerinterrupt(self,event, x, y, flags, param):
+    def uerinterrupt(self,event, x, y, flags, _):
+
         if x>=self.locate[1] and x <= self.locate[3] and y >=self.locate[0] and y <= self.locate[2]:
+            
             self.mousein = True
         else:
             self.mousein = False
@@ -134,15 +136,17 @@ class Button(Text):
                     if com.__name__ in self.keys:
                         keydict = self.keys
                         params = keydict[com.__name__]
-                        print(*params)
                         com(*params)
                     else:
                         com()
-        
+def mousecallevent(event, x, y, flags,*Buttons):
+    for n in range(len(Buttons)):
+        if (type(Buttons[n]) ==type(tuple())):
+            for m in range(len(Buttons[n])):
+                if (Buttons[n][m].__class__.__name__ ==Button.__name__):
+                    Buttons[n][m].uerinterrupt(event, x, y, flags,0)
+                    cv2.setMouseCallback(Buttons[n][m].masterframe, Buttons[n][m].uerinterrupt)
 
-        
-        
-        
 def RoundedRectangle(img,p1,p2,r,color,thickness,lineType):
     #cv2.ellipse(img, center, axes, angle, startAngle, endAngle, color, thickness=1, lineType=cv2.LINE_8, shift=0)
     if p1[0] >=p2[0]:
